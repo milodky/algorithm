@@ -50,8 +50,5 @@ int main(int argn, char **argv)
 	}
 	delete[] Array;
 	return 0;
-
-
-
 }
 
