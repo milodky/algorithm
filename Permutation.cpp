@@ -17,16 +17,19 @@ void Permutation(char *pStr, int Current) {
 	}
 	
 	for (int i = Current; pStr[i] != '\0'; i++) {
-		swap(pStr + i, pStr + Current);
-		Permutation(pStr, Current + 1);
-		swap(pStr + i, pStr + Current);
+		if (*(pStr + i) != *(pStr + Current)) {
+			swap(pStr + i, pStr + Current);
+			Permutation(pStr, Current + 1);
+			swap(pStr + i, pStr + Current);
+		} else
+			Permutation(pStr, Current + 2);
 	}
 }
 
 int main(int argn, char **argv)
 {
 	
-	char pStr[] = {"abc"};
+	char pStr[] = {"abb"};
 	Permutation(pStr, 0);
 	return 0;
 }
