@@ -1,46 +1,46 @@
-#include "MinStack.h"
-int MinStack::min()
+#include "MaxStack.h"
+int MaxStack::max()
 {
 	if (size() == 0)
 		throw exception();
-	return mMin;
+	return mMax;
 }
 
-int MinStack::top()
+int MaxStack::top()
 {
 	if (size() == 0)
 		throw exception();
 	int ret = mStack.top();
-	if (mMin < ret)
+	if (ret < mMax)
 		return ret;
-	return mMin;
+	return mMax;
 }
 
-void MinStack::push(int val)
+void MaxStack::push(int val)
 {
 	if (size() == 0) {
 		mStack.push(val);
-		mMin = val;
+		mMax = val;
 		return;
 	}
-	if (mMin < val)
+	if (val < mMax)
 		mStack.push(val);
 	else {
-		mStack.push(2 * val - mMin);
-		mMin = val;
+		mStack.push(2 * val - mMax);
+		mMax = val;
 	}
 }
 
-void MinStack::pop()
+void MaxStack::pop()
 {
 	if (size() == 0)
 		throw exception();
 	int ret = mStack.top();
-	if (ret <= mMin)
-		mMin = 2 * mMin - ret;
+	if (mMax <= ret)
+		mMax = 2 * mMax - ret;
 	mStack.pop();
 	if (size() == 0)
-		mMin = 0;
+		mMax = 0;
 }
 
 #include <vector>
@@ -54,19 +54,19 @@ int main (int argn, char *argv[])
 	int Num = atoi(argv[1]);
 	srand(time(NULL));
 	vector<int> Array;
-	MinStack Stack;
+	MaxStack Stack;
 	for (int i = 0; i < Num; i++) {
 		int a = rand() % 100;
 		Stack.push(a);
 		Array.push_back(a);
-		cout << "Min in Stack is: " << Stack.min() << endl;
+		cout << "Max in Stack is: " << Stack.max() << endl;
 		for (int j = 0; j < Array.size(); j++)
 			cout << Array[j] << " ";
 		cout << endl;
 	}
-	cout << endl << "Pop:" << endl;
+	cout << endl << "Pop:" << endl << endl;
 	for (int i = 0; i < Num; i++) {
-		cout << "Min in Stack is: " << Stack.min() << endl;
+		cout << "Max in Stack is: " << Stack.max() << endl;
 		for (int j = 0; j < Array.size(); j++)
 			cout << Array[j] << " ";
 		cout << endl;
