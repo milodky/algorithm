@@ -1,0 +1,57 @@
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+void output(vector<int> &v)
+{
+	int Size = v.size();
+	for (int i = 0; i < Size; i++)
+		cout << v[i] << " ";
+	cout << endl;
+}
+void swap(vector<int> &v, int i, int j)
+{
+	if (i == j)
+		return;
+	int temp = v[i];
+	v[i] = v[j];
+	v[j] = temp;
+}
+
+void partition(vector<int> &v, int K)
+{
+	int Size = v.size();
+	int i = 0;
+	int j = Size - 1;
+
+	while (i < j) {
+		if (v[j] < K) {
+			swap(v, i, j);
+			
+		} else
+			j--;
+
+		if (v[i] >= K) {
+			swap(v, i, j);
+		} else
+			i++;
+
+
+	}
+}
+
+int main(int argn, char *argv[])
+{
+	int Num = atoi(argv[1]);
+	vector<int> v(Num);
+	srand(time(NULL));
+	for (int i = 0; i < Num; i++)
+		v[i] = rand() % 50;
+	output(v);
+	partition(v, 25);
+	output(v);
+	return 1;
+}
+

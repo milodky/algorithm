@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <exception>
 #include <stdexcept>
 using namespace std;
@@ -6,7 +7,7 @@ using namespace std;
 void ax(int b)
 {
 	if (b < 5)
-		throw out_of_range();
+		throw out_of_range("fucking shit off\n");
 }
 
 
